@@ -52,6 +52,7 @@ test:
   adapter: postgresql
   encoding: unicode
   database: rails_microblog_test
+  host: localhost
   pool: 5
   username: microverse
   password: password

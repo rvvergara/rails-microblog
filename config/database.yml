@@ -77,4 +77,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  database: rails-microblog_production
+  <<: *default
+  database: rails_microblog_production
+  username: rails_microblog
+  password: <%= ENV['RAILS_MICROBLOG_DATABASE_PASSWORD'] %>

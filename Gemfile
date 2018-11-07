@@ -8,7 +8,8 @@ gem 'rails', '~> 5.2.1'
 
 # Bootstrap 4.1.3 sass version
 gem 'bootstrap', '4.1.3'
-
+# Jquery-rails for bootstrap usage
+gem 'jquery-rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server

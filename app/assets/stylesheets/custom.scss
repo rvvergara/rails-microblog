@@ -1,5 +1,13 @@
 @import "bootstrap";
 
+// Variables
+$black: #000;
+$light-header-gray: #565656;
+$light-gray: #777;
+$footer-beige: #eaeaea;
+$footer-light-gray: #555;
+$footer-hover-dark: #222;
+
 body {
   padding-top: 60px;
 }
@@ -44,7 +52,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777;
+  color: $light-gray;
 }
 
 p {
@@ -58,14 +66,14 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #000;
+  color: $black;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
 
   &:hover {
-    color: #565656;
+    color: $light-header-gray;
     text-decoration: none;
   }
 }
@@ -75,14 +83,14 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
+  border-top: 1px solid $footer-beige;
+  color: $light-gray;
 
   a {
-    color: #555;
+    color: $footer-light-gray;
 
     &:hover {
-      color: #222;
+      color: $footer-hover-dark;
     }
   }
 

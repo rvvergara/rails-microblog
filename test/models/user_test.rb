@@ -48,6 +48,11 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "email address should be converted to lower case" do
+    @user.email = "HELLO@YAHOO.COM"
+    assert @user.valid?
+  end
+
   test "email addresses should be unique" do
     @duplicate_user = @user.dup
     @duplicate_user.email = @user.email.upcase

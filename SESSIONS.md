@@ -147,7 +147,10 @@ test "valid signup information" do
     assert is_logged_in?
 end
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> b787faf89dc71118e3ab9effe9bd41ba6e404f30
 <<<<<<< HEAD
 
 13. To log out user:
@@ -170,7 +173,12 @@ def destroy
     redirect_to root_url
   end
 ```
+<<<<<<< HEAD
 
 =======
 
 > > > > > > > 81305cf05cc97b8792c9f124222a8e61104feefc
+=======
+=======
+>>>>>>> 81305cf05cc97b8792c9f124222a8e61104feefc
+>>>>>>> b787faf89dc71118e3ab9effe9bd41ba6e404f30

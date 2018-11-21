@@ -6,7 +6,7 @@
 
 2. This will generate routes but only maintain:
 
-###config/routes.rb
+### config/routes.rb
 
 `get '/login', to: 'sessions#new'`<br>
 `post '/login', to: 'sessions#create'`<br>
@@ -148,6 +148,8 @@ test "valid signup information" do
 end
 ```
 
+<<<<<<< HEAD
+
 13. To log out user:
 
 - Create a `log_out` method in `helpers/sessions_helper.rb`:
@@ -168,3 +170,7 @@ def destroy
     redirect_to root_url
   end
 ```
+
+=======
+
+> > > > > > > 81305cf05cc97b8792c9f124222a8e61104feefc

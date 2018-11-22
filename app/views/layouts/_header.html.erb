@@ -23,7 +23,7 @@
                 <li class="nav-item">
                 <%= link_to "Profile",   current_user, class: "nav-link"%></li>
                 <li class="nav-item">
-                <%= link_to "Settings",   "#", class: "nav-link"%></li>
+                <%= link_to "Settings",   edit_user_path(current_user), class: "nav-link"%></li>
                 <li class="divider"></li>
                 <li class="nav-item">
                 <%= link_to "Log out",   logout_path, method: :delete, class: "nav-link"%></li>

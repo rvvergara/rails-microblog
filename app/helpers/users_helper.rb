@@ -16,9 +16,13 @@ module UsersHelper
     return params[:action] == "new" ? "Create my account" : "Update account"
   end
 
-  # this will set display of gravatar edit to none when the form is for new user
+  # this will set display of gravatar edit to none when the form is for new user and also delete link only to admins
   def no_display
     display = params[:action] == 'new' ? 'no-display' : nil
+  end
+
+  def no_delete(user)
+    !current_user.admin? || current_user?(user) ? 'no-display' : nil
   end
 
 end

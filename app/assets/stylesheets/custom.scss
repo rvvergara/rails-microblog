@@ -216,6 +216,29 @@ a.btn {
   width: 100%;
 }
 
+a.btn-danger {
+  width: 5%;
+
+  &:visited,
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+}
+
 .no-display {
   display: none;
+}
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $light-gray;
+  }
 }

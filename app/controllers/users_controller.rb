@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, :correct_user, only: [:edit, :update] 
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy] 
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: [:destroy]
 
   def index 
-   @users = User.all 
+  #  @users = User.all
+  @users = User.paginate(page: params[:page]) 
   end
 
   def show
@@ -10,7 +13,11 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     rescue => e
       flash[:danger] = "Cannot find user"
-      redirect_to users_path
+      if logged_in?
+        redirect_to users_path
+      else
+        redirect_to root_path
+      end
     end
   end
 
@@ -22,6 +29,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      log_in(@user)
+      flash[:success] = "Welcome to MicroBlog, #{@user.name}!!"
+      redirect_to @user
+    else
+      render 'new'
+    end
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -31,15 +49,17 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      log_in(@user)
-      flash[:success] = "Welcome to MicroBlog, #{@user.name}!!"
-      redirect_to @user
+  
+  def destroy
+    @user = User.find_by(id:params[:id])
+    if !@user.nil?
+      @user.delete
+      flash[:warning] = "User deleted"
+      redirect_to users_path
     else
-      render 'new'
+      store_location
+      flash[:danger] = "User does not exist or already deleted"
+      redirect_to users_path
     end
   end
 
@@ -59,10 +79,6 @@ class UsersController < ApplicationController
       end
     end
 
-    def current_user?(user)
-      current_user == user
-    end
-
     # Confirms the correct user
     def correct_user
       @target_user = User.find(params[:id])
@@ -71,4 +87,11 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
+  
+  def admin_user
+    unless current_user.admin?
+      redirect_to root_path
+    end
+  end
+    
 end

@@ -1,0 +1,9 @@
+<li>
+  <%= gravatar_for user, size: 50 %>
+  <%= link_to user.name, user %>
+  &nbsp
+  <%= link_to "Delete", user, 
+  method: "delete", 
+  data: {confirm: "Are you sure?"}, 
+  class: "#{no_delete(user)} btn btn-danger btn-sm" , type: 'button' %>
+</li>

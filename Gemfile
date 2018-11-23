@@ -9,6 +9,14 @@ gem 'rails', '~> 5.2.1'
 # bcrypt
 gem 'bcrypt',   '3.1.12'
 
+# faker
+gem 'faker',          '1.7.3'
+
+# for pagination
+gem 'will_paginate',           '3.1.6'
+
+gem 'will_paginate-bootstrap4', '~> 0.2.2'
+
 # Bootstrap 4.1.3 sass version
 gem 'bootstrap', '4.1.3'
 # Jquery-rails for bootstrap usage

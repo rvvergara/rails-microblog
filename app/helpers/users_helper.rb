@@ -11,4 +11,14 @@ module UsersHelper
     params[:action] == "new" ? signup_path : nil
   end
   
+  # This will set text in user form depending on whether the form is for signup or for updating profile
+  def btn_txt
+    return params[:action] == "new" ? "Create my account" : "Update account"
+  end
+
+  # this will set display of gravatar edit to none when the form is for new user
+  def no_display
+    display = params[:action] == 'new' ? 'no-display' : nil
+  end
+
 end

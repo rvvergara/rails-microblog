@@ -13,16 +13,13 @@
 
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
-      <% btn_txt = params[:action] == "new" ? "Create my account" : "Update account" %>
       <% target_path = params[:action] == "edit" ? user_path(@user) : root_url  %>
       <%= f.submit btn_txt, class: "btn btn-primary" %>
       <a href=<%=target_path%> class="btn btn-success">Cancel</a>
     <% end %>
-    <% if params[:action] == "edit"%>
-      <div class="gravatar_edit">
-      <%= gravatar_for @user %>
+    <div class="gravatar_edit <%= no_display %>">
+      <%= gravatar_for @user if !no_display %>
       <a href="http://gravatar.com/emails" target="_blank" rel="noopener">change</a>
     </div>
-    <% end %>
   </div>
 </div>

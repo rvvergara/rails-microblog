@@ -24,5 +24,4 @@ module UsersHelper
   def no_delete(user)
     !current_user.admin? || current_user?(user) ? 'no-display' : nil
   end
-
 end

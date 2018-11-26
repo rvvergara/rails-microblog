@@ -4,19 +4,18 @@ class UsersController < ApplicationController
   before_action :admin_user, only: [:destroy]
 
   def index 
-  #  @users = User.all
-  @users = User.paginate(page: params[:page]) 
+  @users = User.where(activated:true).paginate(page: params[:page])
   end
 
   def show
-    begin
-      @user = User.find(params[:id])
-    rescue => e
+    @user = User.find_by(id:params[:id])
+    if @user.nil?
       flash[:danger] = "Cannot find user"
-      if logged_in?
+      logged_in? ? redirect_to(users_path) : redirect_to(root_path)
+    else
+      if !@user.activated?
+        flash[:warning] = "Selected user hasn't activated his/her account"
         redirect_to users_path
-      else
-        redirect_to root_path
       end
     end
   end
@@ -32,9 +31,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in(@user)
-      flash[:success] = "Welcome to MicroBlog, #{@user.name}!!"
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account"
+      redirect_to root_path
     else
       render 'new'
     end

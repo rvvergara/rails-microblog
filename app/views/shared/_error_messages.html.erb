@@ -1,6 +1,6 @@
-<% if @user.errors.any? %>
+<% if object.errors.any? %>
   <div id="error_explanation">
-      <%errors = @user.errors%>
+      <%errors = object.errors%>
       <div class="alert alert-danger">
         <%= pluralize(errors.count, "error")%> were encountered, which prevented this user from being saved: 
         <ul>

@@ -12,6 +12,10 @@ gem 'bcrypt',   '3.1.12'
 # faker
 gem 'faker',          '1.7.3'
 
+gem 'carrierwave',    '1.2.3'
+
+gem 'mini_magick',    '4.9.2'
+
 # for pagination
 gem 'will_paginate',           '3.1.6'
 

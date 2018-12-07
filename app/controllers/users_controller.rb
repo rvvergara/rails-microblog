@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id:params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
     if @user.nil?
       flash[:danger] = "Cannot find user"
       logged_in? ? redirect_to(users_path) : redirect_to(root_path)
@@ -68,16 +69,6 @@ class UsersController < ApplicationController
   end
 
   # Before filters
-
-    # Confirms a logged-in user.
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "You must be logged in to do that!"
-        redirect_to login_url
-      end
-    end
-
     # Confirms the correct user
     def correct_user
       @target_user = User.find(params[:id])

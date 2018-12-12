@@ -15,6 +15,16 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   has_many :microposts, dependent: :destroy
+
+  has_many :active_relationships,                           foreign_key: :follower_id, 
+           class_name: "Relationship", dependent: :destroy
+
+  has_many :passive_relationships, foreign_key: :followed_id, class_name: "Relationship", dependent: :destroy
+
+  has_many :followers, through: :passive_relationships, class_name: "User"
+
+  has_many :followings, through: :active_relationships, source: :followed
+
   # Returns the hash digest of the given string.
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

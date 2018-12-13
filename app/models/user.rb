@@ -19,11 +19,12 @@ class User < ApplicationRecord
   has_many :active_relationships,                           foreign_key: :follower_id, 
            class_name: "Relationship", dependent: :destroy
 
-  has_many :passive_relationships, foreign_key: :followed_id, class_name: "Relationship", dependent: :destroy
+  has_many :passive_relationships,      foreign_key: :followed_id, 
+        class_name: "Relationship", dependent: :destroy
 
   has_many :followers, through: :passive_relationships, class_name: "User"
 
-  has_many :followings, through: :active_relationships, source: :followed
+  has_many :following, through: :active_relationships, source: :followed
 
   # Returns the hash digest of the given string.
   def self.digest(string)
@@ -77,7 +78,19 @@ class User < ApplicationRecord
   end
 
   def feed
-    Micropost.where("user_id = ?", id)
+    Micropost.eager_load(:user).where("user_id IN (?) OR user_id = ?", following_ids, id)
+  end
+
+  def follow(other)
+    following.push(other)
+  end
+
+  def unfollow(other)
+    following.delete(other)
+  end
+
+  def following?(other)
+    following.include?(other)
   end
 
   private
@@ -90,4 +103,5 @@ class User < ApplicationRecord
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
+
 end

@@ -28,3 +28,5 @@
 
 #avoid conflict between Spring and Git
 spring/*.pid
+# Ignore application configuration
+/config/application.yml
